@@ -5,15 +5,42 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.marcelo.core.domain.model.Character
 import com.marcelo.marvelapp.R
+import com.marcelo.marvelapp.databinding.FragmentCharactersBinding
+import com.marcelo.marvelapp.presentation.fragments.characters.adapter.CharactersAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CharactersFragment : Fragment() {
+
+    private var _binding: FragmentCharactersBinding? = null
+    private val binding: FragmentCharactersBinding get() = _binding!!
+
+    private val charactersAdapter = CharactersAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ) = FragmentCharactersBinding.inflate(
+        inflater,
+        container,
+        false
+    ).apply {
+        _binding = this
+    }.root
 
-        return inflater.inflate(R.layout.fragment_characters, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initCharactersAdapter()
+    }
+
+    private fun initCharactersAdapter() {
+        with(binding.rvCharacters) {
+            setHasFixedSize(true)
+            adapter = charactersAdapter
+        }
     }
 }

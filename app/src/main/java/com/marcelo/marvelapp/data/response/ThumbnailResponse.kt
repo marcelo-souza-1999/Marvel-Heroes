@@ -1,4 +1,4 @@
-package com.marcelo.core.data.response
+package com.marcelo.marvelapp.data.response
 
 data class ThumbnailResponse(
     val path: String,

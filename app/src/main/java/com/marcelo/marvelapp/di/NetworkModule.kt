@@ -1,6 +1,6 @@
 package com.marcelo.marvelapp.di
 
-import com.marcelo.core.data.network.interceptor.AuthorizationInterceptor
+import com.marcelo.marvelapp.data.network.interceptor.AuthorizationInterceptor
 import com.marcelo.marvelapp.BuildConfig
 import dagger.Module
 import dagger.Provides

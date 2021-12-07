@@ -1,4 +1,4 @@
-package com.marcelo.core.data.network.interceptor
+package com.marcelo.marvelapp.data.network.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response
