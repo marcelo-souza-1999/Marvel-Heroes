@@ -1,4 +1,4 @@
-package com.marcelo.core.data.response
+package com.marcelo.marvelapp.data.response
 
 data class CharacterResponse(
     val id: String,

@@ -5,7 +5,6 @@
     <string name="error_loading_more_try_again">Erro ao tentar carregar a próxima página. Tente novamente</string>
     <string name="back">Voltar</string>
 
-
     <string name="app_menu_heroes">Heroes</string>
     <string name="app_menu_favorites">Favoritos</string>
     <string name="app_menu_about">Sobre</string>
@@ -27,4 +26,6 @@
 
     <string name="about_screen_title">Sobre</string>
     <string name="about_attribution">Copyright© 2021 Marvel</string>
+
+    <string name="description_image_heroe_marvel">Imagem de um Heroi da Marvel</string>
 </resources>

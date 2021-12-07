@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="height_navigation">56dp</dimen>
+    <dimen name="height_card_view">230dp</dimen>
+    <dimen name="height_image_view_character">170dp</dimen>
+    <dimen name="margin_start_name_character">24dp</dimen>
+    <dimen name="margin_end_name_character">12dp</dimen>
+    <dimen name="margin_card_view_characters">8dp</dimen>
+    <dimen name="radius_card_view_characters">8dp</dimen>
 </resources>
