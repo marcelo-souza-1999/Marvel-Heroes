@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import com.marcelo.core.data.repository.interfaces.CharactersRemoteDataSource
 import com.marcelo.core.data.repository.interfaces.CharactersRepository
 import com.marcelo.core.domain.model.Character
+import com.marcelo.marvelapp.data.pagging.CharactersPagingSource
 import com.marcelo.marvelapp.data.response.DataWrapperResponse
 import javax.inject.Inject
 
@@ -12,6 +13,6 @@ class CharactersRepositoryImpl @Inject constructor(
 ): CharactersRepository{
 
     override fun getCharacters(query: String): PagingSource<Int, Character> {
-        return CharactersPaging()
+        return CharactersPagingSource(remoteDataSource, query)
     }
 }
