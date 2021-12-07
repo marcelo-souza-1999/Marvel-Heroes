@@ -1,4 +1,4 @@
-package com.marcelo.core.data.network
+package com.marcelo.core.data.network.interfaces
 
 import com.marcelo.core.data.response.DataWrapperResponse
 import retrofit2.http.GET
