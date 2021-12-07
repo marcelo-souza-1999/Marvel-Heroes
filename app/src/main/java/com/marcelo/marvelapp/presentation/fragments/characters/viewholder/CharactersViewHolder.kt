@@ -1,4 +1,4 @@
-package com.marcelo.marvelapp.presentation.fragments.characters
+package com.marcelo.marvelapp.presentation.fragments.characters.viewholder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
