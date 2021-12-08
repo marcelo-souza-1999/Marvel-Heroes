@@ -1,19 +1,22 @@
 package com.marcelo.marvelapp.presentation.fragments.characters.adapter
 
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.marcelo.core.domain.model.Character
 import com.marcelo.marvelapp.presentation.fragments.characters.viewholder.CharactersViewHolder
 
-class CharactersAdapter : ListAdapter<Character, CharactersViewHolder>(diffCalback) {
+class CharactersAdapter : PagingDataAdapter<Character, CharactersViewHolder>(diffCalback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
         return CharactersViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        getItem(position)?.let {character ->
+            holder.bind(character)
+        }
     }
 
     companion object {

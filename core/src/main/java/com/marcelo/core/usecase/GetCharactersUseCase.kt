@@ -7,8 +7,9 @@ import com.marcelo.core.data.repository.interfaces.CharactersRepository
 import com.marcelo.core.domain.model.Character
 import com.marcelo.core.usecase.base.PagingUseCase
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class GetCharactersUseCase(
+class GetCharactersUseCase @Inject constructor(
     private val charactersRepository: CharactersRepository
 ) : PagingUseCase<GetCharactersUseCase.GetCharactersParams, Character>() {
 
