@@ -17,7 +17,9 @@ class CharactersViewHolder(
 
     fun bind(character: Character) {
         txtName.text = character.name
+
         Glide.with(itemView)
+            .asBitmap()
             .load(character.imageUrl)
             .fallback(R.drawable.ic_img_loading_error)
             .into(imgCharacter)
