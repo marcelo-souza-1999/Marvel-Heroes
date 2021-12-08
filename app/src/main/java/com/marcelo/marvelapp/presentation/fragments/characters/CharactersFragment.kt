@@ -1,19 +1,23 @@
 package com.marcelo.marvelapp.presentation.fragments.characters
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import com.marcelo.core.domain.model.Character
-import com.marcelo.marvelapp.R
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.LoadState
 import com.marcelo.marvelapp.databinding.FragmentCharactersBinding
 import com.marcelo.marvelapp.presentation.fragments.characters.adapter.CharactersAdapter
+import com.marcelo.marvelapp.presentation.fragments.characters.adapter.CharactersLoadStateAdapter
 import com.marcelo.marvelapp.presentation.viewmodel.CharactersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -24,7 +28,7 @@ class CharactersFragment : Fragment() {
 
     private val viewModel: CharactersViewModel by viewModels()
 
-    private val charactersAdapter = CharactersAdapter()
+    private lateinit var charactersAdapter: CharactersAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,21 +46,69 @@ class CharactersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initCharactersAdapter()
-        setupViewModel()
+        observeInitialStateShimmer()
+        observeViewModel()
     }
 
     private fun initCharactersAdapter() {
+        charactersAdapter = CharactersAdapter()
         with(binding.rvCharacters) {
+            scrollToPosition(0)
             setHasFixedSize(true)
-            adapter = charactersAdapter
+            adapter = charactersAdapter.withLoadStateFooter(
+                footer = CharactersLoadStateAdapter(
+                    charactersAdapter::retry
+                )
+            )
         }
     }
 
-    private fun setupViewModel() {
-        lifecycleScope.launch{
-            viewModel.charactersPagingData("").collect {pagingData ->
-                charactersAdapter.submitData(pagingData)
+    private fun observeViewModel() {
+        lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.charactersPagingData("").collect { pagingData ->
+                    charactersAdapter.submitData(pagingData)
+                }
             }
         }
+    }
+
+    private fun observeInitialStateShimmer() {
+        lifecycleScope.launch {
+            charactersAdapter.loadStateFlow.collectLatest { loadState ->
+                binding.flipperCharacters.displayedChild = when (loadState.refresh) {
+                    is LoadState.Loading -> {
+                        setShimmerVisibility(true)
+                        FLIPPER_CHILD_LOADING
+                    }
+                    is LoadState.NotLoading -> {
+                        setShimmerVisibility(false)
+                        FLIPPER_CHILD_CHARACTERS
+                    }
+                    is LoadState.Error -> {
+                        setShimmerVisibility(false)
+                        binding.includeViewError.btnRetry.setOnClickListener {
+                            charactersAdapter.refresh()
+                        }
+                        FLIPPER_CHILD_ERROR
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setShimmerVisibility(visibility: Boolean) {
+        binding.includeShimmerCharacters.shimmerCharacters.run {
+            isVisible = visibility
+            if (visibility) {
+                startShimmer()
+            } else stopShimmer()
+        }
+    }
+
+    companion object {
+        private const val FLIPPER_CHILD_LOADING = 0
+        private const val FLIPPER_CHILD_CHARACTERS = 1
+        private const val FLIPPER_CHILD_ERROR = 2
     }
 }
