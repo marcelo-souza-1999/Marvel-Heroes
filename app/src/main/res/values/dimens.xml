@@ -7,4 +7,10 @@
     <dimen name="margin_end_name_character">12dp</dimen>
     <dimen name="margin_card_view_characters">8dp</dimen>
     <dimen name="radius_card_view_characters">8dp</dimen>
+    <dimen name="size_text_error">32sp</dimen>
+    <dimen name="margin_view_error">16dp</dimen>
+    <dimen name="padding_start_view_load_more">16dp</dimen>
+    <dimen name="padding_end_view_load_more">16dp</dimen>
+    <dimen name="padding_top_view_load_more">24dp</dimen>
+    <dimen name="padding_bottom_view_load_more">24dp</dimen>
 </resources>
