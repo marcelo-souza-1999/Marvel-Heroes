@@ -6,7 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.marcelo.core.domain.model.Character
-import com.marcelo.core.usecase.GetCharactersUseCase
+import com.marcelo.core.usecase.interfaces.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
