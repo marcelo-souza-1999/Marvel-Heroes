@@ -1,4 +1,4 @@
-package com.marcelo.marvelapp.presentation.viewmodel
+package com.marcelo.marvelapp.factoryresponse
 
 import com.marcelo.marvelapp.data.response.CharacterResponse
 import com.marcelo.marvelapp.data.response.DataContainerResponse

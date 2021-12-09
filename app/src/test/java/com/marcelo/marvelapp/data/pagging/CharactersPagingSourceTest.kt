@@ -1,13 +1,12 @@
 package com.marcelo.marvelapp.data.pagging
 
-import android.accounts.NetworkErrorException
 import androidx.paging.PagingSource
 import com.android.marcelo.testings.MainCoroutinesRule
 import com.android.marcelo.testings.model.CharacterFactory
 import com.marcelo.core.data.repository.interfaces.CharactersRemoteDataSource
 import com.marcelo.core.domain.model.Character
 import com.marcelo.marvelapp.data.response.DataWrapperResponse
-import com.marcelo.marvelapp.presentation.viewmodel.DataWrapperResponseFactory
+import com.marcelo.marvelapp.factoryresponse.DataWrapperResponseFactory
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
