@@ -1,6 +1,7 @@
 package com.marcelo.marvelapp.presentation.fragments.characters
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -88,7 +89,7 @@ class CharactersFragment : Fragment() {
                     is LoadState.Error -> {
                         setShimmerVisibility(false)
                         binding.includeViewError.btnRetry.setOnClickListener {
-                            charactersAdapter.refresh()
+                           charactersAdapter.retry()
                         }
                         FLIPPER_CHILD_ERROR
                     }
