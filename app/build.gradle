@@ -18,6 +18,15 @@ android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
+    signingConfigs {
+        release {
+            storeFile file('/home/marcelo-otsutsuki/Área de Trabalho/Kotlin Projects/Projeto Curso/Marvel-Heroes/keystore/marvel_app_key.jks')
+            storePassword 'KaguyaOtsutsuki'
+            keyAlias 'marvel-app'
+            keyPassword 'KaguyaOtsutsuki'
+        }
+    }
+
     defaultConfig {
         applicationId "com.marcelo.marvelapp"
         minSdkVersion 23
@@ -33,8 +42,21 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            debuggable true
+        }
+        develop {
+            initWith debug
+            minifyEnabled true
+            applicationIdSuffix '.develop'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro',
+            'proguard-rules-develop.pro'
+        }
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

@@ -1,10 +1,14 @@
 package com.marcelo.marvelapp.data.response
 
+import com.google.gson.annotations.SerializedName
 import com.marcelo.core.domain.model.Character
 
 data class CharacterResponse(
+    @SerializedName("id")
     val id: String,
+    @SerializedName("name")
     val name: String,
+    @SerializedName("thumbnail")
     val thumbnail: ThumbnailResponse
 )
 
